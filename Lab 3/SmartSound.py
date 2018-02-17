@@ -20,3 +20,4 @@ class SmartSound:
         def get_audio(self):
                 pin_audio = 3
                 return self.mcp.read(pin_audio)
+            
