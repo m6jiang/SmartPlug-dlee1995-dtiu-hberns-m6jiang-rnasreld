@@ -1,0 +1,46 @@
+  GNU nano 2.5.3                                                            File: dashboard.html                                                                                                                                
+<!doctype html>
+<html>
+    <head>
+        <title>Lab5</title>
+
+                <style>
+                        table, th, td {
+                        border: 1px solid black;
+                        border-collapse: collapse;
+                }
+                th, td {
+                        padding: 5px;
+                        text-align: left;
+                }
+                table#t01 {
+                        width: 100%;
+                        background-color: #f1f1c1;
+                }
+                </style>
+    </head>
+    <body>
+        <form action="{{ url_for('Layout') }} method="GET">
+        <input type="submit">
+        </form>
+        {% block body %}
+                        <h1>Lab 5 ECE 140a</h1>
+            <table id = "mytable">
+                                <tr>
+                                        <th>Celsius</th>
+                                        <th>Light</th>
+                                        <th>Envelope</th>
+                                        <th>Fahrenheit</th>
+                                        <th>Humidity</th>
+                                </tr>
+                                <tr> {% for entry in pr2 %}
+                                        <td>{{ entry.celsius }}
+                                        </td>
+                                        <td>{{ entry.fahrenheit }}
+                                        </td>
+                                     {% endfor %}
+                                </tr>
+        {% endblock %}
+    </body>
+</html>
+
