@@ -1,0 +1,26 @@
+{% extends "dashboard.html" %}
+
+
+    {% block body %}   
+        
+                        <h1>Lab 5 ECE 140a</h1>
+<table id = "mytable">
+                                <tr>
+                                        <th>Celsius</th>
+                                        <th>Light</th>
+                                        <th>Envelope</th>
+                                        <th>Fahrenheit</th>
+                                        <th>Humidity</th>
+                                </tr>
+    {% for entry in pr2 %}
+    
+                                <tr>
+                                    <td>{{ entry.celsius }}</td>
+                                        
+                                    <td>{{ entry.fahrenheit }}</td>
+                                   
+                                </tr>
+    {% endfor %}
+</table>
+
+    {% endblock %}
