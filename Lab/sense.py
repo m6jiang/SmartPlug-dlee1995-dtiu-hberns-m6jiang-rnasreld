@@ -151,4 +151,8 @@ def humid():
         i += 1
     return jsonify(data_as_dict)
 
+@app.route('/data_post', method = 'POST')
+    db = get_db()
+    cur = db.execute('INSERT INTO data (envelope, humidity, light, temp_c, temp_f) VALUES [?,?,?,?,?]',[dataNew.envelope, dataNew.humidity, dataNew.light, dataNew.temp_c, dataNew.temp_f])
+
 

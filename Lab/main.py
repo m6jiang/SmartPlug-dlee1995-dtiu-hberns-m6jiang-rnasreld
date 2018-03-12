@@ -1,3 +1,4 @@
+import requests
 import sys
 import time
 import SmartMCP3008
@@ -7,11 +8,27 @@ import SmartSound
 dhtPin = 4
 mcpPin = 2
 
-class getsensor:
-    newSS = SmartSound.SmartSound()
-    newMCP = SmartMCP3008.SmartMCP()
-    newDHT = SmartDHT22.SmartDHT(dhtPin)
+newSS = SmartSound.SmartSound()
+newMCP = SmartMCP3008.SmartMCP()
+newDHT = SmartDHT22.SmartDHT(dhtPin)
 
+while 1:
+    add_data()
+    print("data added")
+    time.sleep(60)
+
+def add_data():
+    url = "/data_post"
+    values = {"tempC" : newDHT.get_temp_celsius(), "tempF" : newDHT.get_temp_fahrenheit(), "light" : newMCP.read(mcpPin), "humidity" : newDHT.get_humidity(), "envelope" : newSound.get_envelope()}
+
+
+    resp = requests.post(url, dataNew=values)
+    parsed_json = resp.json()
+    return parsed_json   
+    
+
+     
+                                                      
 
 
 
