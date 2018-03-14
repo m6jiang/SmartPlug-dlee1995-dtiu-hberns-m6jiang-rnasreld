@@ -8,25 +8,24 @@ import SmartSound
 dhtPin = 4
 mcpPin = 2
 
-newSS = SmartSound.SmartSound()
+newSound = SmartSound.SmartSound()
 newMCP = SmartMCP3008.SmartMCP()
 newDHT = SmartDHT22.SmartDHT(dhtPin)
 
+
+def add_data():
+    url = "100.80.242.4:5000/data_post"
+    values = {"tempC" : newDHT.get_temp_celsius(), "tempF" : newDHT.get_temp_fahrenheit(), "light" : newMCP.read(mcpPin), "humidity" : newDHT.get_humidity(), "envelope" : newSound.get_envelope()}
+
+
+    resp = requests.post(url, data=values)
+    parsed_json = resp.json()
+    return parsed_json   
+    
 while 1:
     add_data()
     print("data added")
     time.sleep(60)
-
-def add_data():
-    url = "/data_post"
-    values = {"tempC" : newDHT.get_temp_celsius(), "tempF" : newDHT.get_temp_fahrenheit(), "light" : newMCP.read(mcpPin), "humidity" : newDHT.get_humidity(), "envelope" : newSound.get_envelope()}
-
-
-    resp = requests.post(url, dataNew=values)
-    parsed_json = resp.json()
-    return parsed_json   
-    
-
      
                                                       
 
