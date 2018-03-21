@@ -1,0 +1,121 @@
+                                                                                                                                
+<!doctype html>
+<html>
+    <head>
+        <title>Sensor Data</title>
+
+                <style>
+                table, th, td {
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                }
+                tr:nth-child(even) {background: #CCC}
+                tr:nth-child(odd) {background: #FFF}
+                th, td {
+                    width: 120px;
+                    
+                    text-align: center;
+                }
+                    
+                    
+            
+                    
+                body { 
+                    background-color: aliceblue;
+                    
+                    }
+                table {
+                    margin-left: 830px;
+                    margin-top: 15px;
+                    margin-right: 15px;
+                    }
+
+                div.userInput {
+                    display: inline-block;
+                    width: 300px;
+                    overflow: hidden;
+                    
+                    }
+                div.can {
+                    border: 3px solid black;
+                    margin-left: 700px;
+                    width: 500px;
+                    background-color: ghostwhite;
+                    z-index: 2
+                    }
+           
+                div.prompt {
+                    float:left;
+                    display: inline-block;
+                    margin-left: 25px;
+                    border: 2px solid black;
+                    background-color: lawngreen;
+                    padding: 10px;
+                    }
+                
+                div.jsonGet {
+                    float: left;
+                    display: inline-block;
+                    border: 2px solid black;
+                    background-color: aquamarine;
+                    }
+                h2.dataInfo{ 
+                    text-align: center    
+                    }
+                form {
+                    margin: 10px
+                    }
+                
+              
+                </style>
+    </head>
+    <script src="{{ url_for('static', filename='Chart.bundle.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='getTable.js') }}"></script>
+    <body onload="load()">
+        <div class="userInputs">
+        <div class="jsonGet">
+            <h2 class=dataInfo>Request JSON data:</h2>
+        <form action="{{ url_for('temp') }}" method="GET">
+            Show me the last <input type="text" size=1 name="count" value=60> minutes for:
+            <button type="submit">Temperature</button>
+        </form>
+        
+        <form action="{{ url_for('light') }}" method="GET">
+            Show me the last <input type="text" size=1 name="count" value=60> minutes for:
+            <button type="submit">Light</button>
+        </form>
+        
+        <form action="{{ url_for('sound') }}" method="GET">
+            Show me the last <input type="text" size=1 name="count" value=60> minutes for:
+            <button type="submit">Sound</button>
+        </form>
+        
+        <form action="{{ url_for('humid') }}" method="GET">
+            Show me the last <input type="text" size=1 name="count" value=60> minutes for:
+            <button type="submit">Humidity</button>
+        </form>
+        </div>
+        
+        <div class="prompt">
+        <h2 class=dataInfo>Show visual data:</h2>
+        <p>
+        Show me the last <input type="text" size=1 id="count" value=60> minutes for:
+        </p>
+        <button type="submit" onclick= 'clicked(0)'>Temperature</button>
+        <button type="submit" onclick= 'clicked(1)'>Light</button>
+        <button type="submit" onclick= 'clicked(2)'>Sound</button>
+        <button type="submit" onclick= 'clicked(3)'>Humidity</button>
+        </div>
+        </div>
+        
+        <div class=can>
+        <canvas id="myChart" width="250" height="250"></canvas>
+        </div>
+
+        <table id='mytable'></table>
+            <tr></tr>
+        
+        
+    </body>
+</html>
+
